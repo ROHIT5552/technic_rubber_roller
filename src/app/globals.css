@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-obsidian: #090a0c;
+  --bg-elevated: #111318;
+  --bg-panel: #171b22;
+  --text-primary: #f4f6f9;
+  --text-secondary: #949daa;
+  --accent-rgb: 220 38 38;
+  --accent-bright-rgb: 239 68 68;
+  --accent-dim-rgb: 153 27 27;
+  --accent-hex: #dc2626;
+  --accent-silver: #e2e8f0;
+  --mesh-deep-rgb: 115 12 22;
+  --mesh-mid-rgb: 198 22 36;
+  --mesh-hot-rgb: 255 48 64;
+  --border-hairline: rgba(255, 255, 255, 0.09);
+}
+
+html {
+  background-color: #090a0c;
+  color: #f4f6f9;
+  scroll-behavior: auto;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #090a0c;
+  color: #f4f6f9;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: rgb(var(--mesh-hot-rgb) / 0.55);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgb(var(--mesh-hot-rgb) / 0.85);
+}
+
+::-moz-selection {
+  background-color: rgb(var(--mesh-hot-rgb) / 0.55);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgb(var(--mesh-hot-rgb) / 0.85);
+}
+
+/* Precision metallic scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a0c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333a47;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--accent-rgb));
+}
+
+/* Figma-style multi-layered fire/compound mesh gradients (red + deep crimson + hot scarlet) */
+@keyframes figmaFireDrift {
+  0% {
+    transform: translate3d(0%, 0%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2.5%, 1.8%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(0%, 0%, 0) scale(1);
+  }
+}
+
+@keyframes figmaFirePulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.96;
+    transform: translate3d(2%, -2%, 0) scale(1.08);
+  }
+}
+
+.figma-fire-mesh {
+  background:
+    radial-gradient(ellipse 58% 52% at 72% 44%, rgb(var(--mesh-hot-rgb) / 0.32) 0%, transparent 64%),
+    radial-gradient(ellipse 65% 60% at 54% 68%, rgb(var(--mesh-mid-rgb) / 0.28) 0%, transparent 66%),
+    radial-gradient(ellipse 72% 62% at 86% 24%, rgb(var(--mesh-deep-rgb) / 0.48) 0%, transparent 68%),
+    radial-gradient(ellipse 46% 42% at 16% 22%, rgba(226, 232, 240, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 48% at 24% 85%, rgb(var(--mesh-deep-rgb) / 0.24) 0%, transparent 65%);
+  animation: figmaFireDrift 16s ease-in-out infinite;
+  transition: background 0.55s ease;
+}
+
+.figma-fire-plume {
+  background:
+    radial-gradient(circle at 66% 46%, rgb(var(--mesh-hot-rgb) / 0.28) 0%, rgb(var(--mesh-mid-rgb) / 0.14) 36%, transparent 66%),
+    radial-gradient(circle at 80% 58%, rgb(var(--mesh-deep-rgb) / 0.42) 0%, transparent 58%);
+  filter: blur(42px);
+  animation: figmaFirePulse 11s ease-in-out infinite;
+}
+
+.figma-section-mesh {
+  background:
+    radial-gradient(ellipse 52% 44% at 82% 18%, rgb(var(--mesh-mid-rgb) / 0.16) 0%, transparent 68%),
+    radial-gradient(ellipse 58% 48% at 14% 78%, rgb(var(--mesh-deep-rgb) / 0.28) 0%, transparent 70%);
+}
+
+/* Tactile Figma micro-grain / fractal noise overlay (eliminates gradient banding) */
+.figma-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+  opacity: 0.065;
+}
+
+/* Industrial architectural surfaces with subtle Figma fire-tinted glass sheen */
+.surface-machined {
+  background:
+    radial-gradient(circle at 100% 0%, rgb(var(--mesh-mid-rgb) / 0.14) 0%, transparent 54%),
+    radial-gradient(circle at 0% 100%, rgb(var(--mesh-deep-rgb) / 0.18) 0%, transparent 58%),
+    linear-gradient(165deg, rgba(24, 28, 36, 0.9) 0%, rgba(11, 13, 17, 0.96) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.11);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.07),
+    0 18px 40px -24px rgba(0, 0, 0, 0.85);
+}
+
+.hairline-border {
+  border-color: rgba(226, 232, 240, 0.1);
+}
+
+.metallic-text {
+  background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 55%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.figma-fire-text {
+  background: linear-gradient(
+    100deg,
+    #fff1f2 0%,
+    rgb(var(--mesh-hot-rgb)) 26%,
+    rgb(var(--accent-rgb)) 62%,
+    rgb(var(--mesh-deep-rgb)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 18px rgb(var(--mesh-hot-rgb) / 0.38));
+}
+
+.figma-fire-highlight {
+  background: linear-gradient(
+    95deg,
+    rgb(var(--mesh-hot-rgb)) 0%,
+    rgb(var(--accent-bright-rgb)) 52%,
+    rgb(var(--mesh-mid-rgb)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgb(var(--mesh-hot-rgb) / 0.28));
+}
+
+.figma-fire-plate {
+  display: inline-block;
+  margin-top: 0.08em;
+  padding: 0.05em 0.24em 0.09em;
+  border-radius: 4px;
+  color: #ffffff;
+  background: linear-gradient(
+    105deg,
+    rgb(var(--mesh-hot-rgb) / 0.94) 0%,
+    rgb(var(--mesh-mid-rgb) / 0.96) 52%,
+    rgb(var(--mesh-deep-rgb) / 0.98) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 0 36px -4px rgb(var(--mesh-hot-rgb) / 0.65),
+    0 0 14px -2px rgb(var(--mesh-mid-rgb) / 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.orange-glow,
+.red-glow,
+.accent-glow {
+  box-shadow:
+    0 0 36px -4px rgb(var(--mesh-hot-rgb) / 0.52),
+    0 0 14px -2px rgb(var(--mesh-mid-rgb) / 0.45);
+}
+
+/* Reduced motion accessibility override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
